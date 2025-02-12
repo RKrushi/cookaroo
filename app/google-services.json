@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "613564695828",
+    "firebase_url": "https://recipe-a8169-default-rtdb.firebaseio.com",
+    "project_id": "recipe-a8169",
+    "storage_bucket": "recipe-a8169.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613564695828:android:a535faa2e333879a24ae01",
+        "android_client_info": {
+          "package_name": "com.example.cookaroo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8GnsYizr5oF2P7Xaa3BAT2GDWX77SIvY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613564695828:android:bfa187f0a130d8e124ae01",
+        "android_client_info": {
+          "package_name": "com.example.finderecipe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8GnsYizr5oF2P7Xaa3BAT2GDWX77SIvY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

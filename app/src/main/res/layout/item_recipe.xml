@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/recipe_card_bg"
+    android:elevation="6dp"
+    android:padding="12dp"
+    android:layout_margin="10dp"
+    android:animateLayoutChanges="true">
+
+    <!-- Recipe Image -->
+    <ImageView
+        android:id="@+id/ivRecipeImage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/rounded_image"
+        android:transitionName="recipeImage" />
+
+    <!-- Recipe Title -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:paddingTop="10dp"
+        android:paddingBottom="6dp"
+        android:gravity="center"
+        android:transitionName="recipeTitle"
+        tools:text="Delicious Pasta Recipe 🍝" />
+
+    <!-- Button Row (Show Recipe, Like, Save) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="6dp">
+
+        <!-- Show Recipe Button -->
+        <Button
+            android:id="@+id/btnShowRecipe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View Recipe 🍽️"
+            android:background="@drawable/ripple_button"
+            android:textColor="@android:color/white"
+            android:padding="10dp"
+            android:layout_margin="8dp"/>
+
+        <!-- Like Button -->
+        <ImageButton
+            android:id="@+id/btnLike"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_like"
+            android:contentDescription="Like Recipe"
+            android:layout_margin="8dp"
+            android:scaleType="fitCenter"/>
+
+        <!-- Save Button -->
+        <ImageButton
+            android:id="@+id/btnSave"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_save"
+            android:contentDescription="Save Recipe"
+            android:layout_margin="8dp"
+            android:scaleType="fitCenter"/>
+    </LinearLayout>
+
+</LinearLayout>
