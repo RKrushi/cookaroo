@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -24,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView tvForgotPassword, tvSignUp;
     private FirebaseAuth mAuth;
     private LinearLayout loginCard;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,13 @@ public class LoginActivity extends AppCompatActivity {
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+        sessionManager = new SessionManager(LoginActivity.this); // Initialize SessionManager
+
+        // Check if user is already logged in
+        if (sessionManager.getUserId() != null) {
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish(); // Close LoginActivity
+        }
 
         // Bind views
         etEmail = findViewById(R.id.etEmail);
@@ -78,9 +87,18 @@ public class LoginActivity extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(LoginActivity.this, task -> {
                         if (task.isSuccessful()) {
-                            // Login successful; navigate to MainActivity
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            finish();
+                            // Get the logged-in user ID
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            if (user != null) {
+                                String userId = user.getUid();
+
+                                // Save User ID to SessionManager
+                                sessionManager.saveUserId(userId);
+
+                                // Navigate to MainActivity
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                finish();
+                            }
                         } else {
                             // If sign-in fails, display a message
                             Toast.makeText(LoginActivity.this,

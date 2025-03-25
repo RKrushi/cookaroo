@@ -3,17 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_background">
+    android:background="@drawable/gradient_background">
 
     <!-- Top Image -->
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/topImage"
-        android:layout_width="250dp"
+        android:layout_width="150dp"
         android:layout_height="150dp"
         android:src="@drawable/food_image"
-        android:scaleType="centerCrop"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"/>
+        android:layout_marginTop="40dp"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@android:color/white"/>
+
 
     <!-- Login Title -->
     <TextView

@@ -16,9 +16,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
@@ -43,7 +49,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         holder.tvTitle.setText(recipe.getTitle());
         Picasso.get().load(recipe.getImageUrl()).into(holder.ivRecipeImage);
 
-        // Open Recipe Details
+        // Show Recipe Button
         holder.btnShowRecipe.setOnClickListener(v -> {
             Intent intent = new Intent(context, RecipeDetailsActivity.class);
             intent.putExtra("recipeId", recipe.getId());
@@ -52,18 +58,18 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             context.startActivity(intent);
         });
 
-        // Like Animation
+        // Like Button Animation
         holder.btnLike.setOnClickListener(v -> {
-            Animation animation = AnimationUtils.loadAnimation(context, R.anim.scale_animation);
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.bounce);
             holder.btnLike.startAnimation(animation);
             Toast.makeText(context, "Liked! ❤️", Toast.LENGTH_SHORT).show();
         });
 
-        // Save Animation
+        // Save Button Click (Save to Firebase)
         holder.btnSave.setOnClickListener(v -> {
-            Animation animation = AnimationUtils.loadAnimation(context, R.anim.scale_animation);
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.bounce);
             holder.btnSave.startAnimation(animation);
-            Toast.makeText(context, "Saved! 📌", Toast.LENGTH_SHORT).show();
+            saveRecipeToFirebase(recipe);
         });
     }
 
@@ -86,5 +92,26 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             btnLike = itemView.findViewById(R.id.btnLike);
             btnSave = itemView.findViewById(R.id.btnSave);
         }
+    }
+
+    private void saveRecipeToFirebase(RecipeModel recipe) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            Toast.makeText(context, "Please login to save recipes!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users")
+                .child(user.getUid()).child("SavedRecipes");
+
+        String recipeId = String.valueOf(recipe.getId());
+        Map<String, Object> recipeData = new HashMap<>();
+        recipeData.put("title", recipe.getTitle());
+        recipeData.put("imageUrl", recipe.getImageUrl());
+        recipeData.put("recipeId", recipeId);
+
+        databaseReference.child(recipeId).setValue(recipeData)
+                .addOnSuccessListener(aVoid -> Toast.makeText(context, "Recipe Saved! 📌", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e -> Toast.makeText(context, "Failed to save recipe!", Toast.LENGTH_SHORT).show());
     }
 }

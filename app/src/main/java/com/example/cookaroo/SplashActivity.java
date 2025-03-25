@@ -97,10 +97,10 @@ public class SplashActivity extends AppCompatActivity {
 
                 // Wait for 5 seconds before smoving to LoginActivity
                 new Handler().postDelayed(() -> {
-                    Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
+                    Intent intent = new Intent(SplashActivity.this,OnboardingActivity.class);
                     startActivity(intent);
                     finish(); // Close SplashActivity
-                }, 5000); // 5-second delay
+                }, 3000); // 5-second delay
             }
         });
         finalSet.start();

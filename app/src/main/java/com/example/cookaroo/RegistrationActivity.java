@@ -41,8 +41,8 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
 
         // Setup Toolbar with back arrow
-        Toolbar toolbar = findViewById(R.id.toolbarRegistration);
-        setSupportActionBar(toolbar);
+       // Toolbar toolbar = findViewById(R.id.toolbarRegistration);
+       // setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             // Show the back arrow in the toolbar
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -60,7 +60,7 @@ public class RegistrationActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnRegister = findViewById(R.id.btnRegister);
         tvLoginRedirect = findViewById(R.id.tvLoginRedirect);
-        progressBar = findViewById(R.id.progressBar);
+       // progressBar = findViewById(R.id.progressBar);
 
         // Animate the registration form views
        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
