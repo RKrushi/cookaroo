@@ -36,7 +36,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String API_KEY = "fc807d2d1fb34b89bb828b8293c8b29f";
+    //private static final String API_KEY = "fc807d2d1fb34b89bb828b8293c8b29f";
+    private static final String API_KEY = "";
     private EditText etIngredients;
     private Button btnFindRecipes;
     private RecyclerView rvRecipes;
